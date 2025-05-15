@@ -1,17 +1,18 @@
-const inputDiv = document.createElement('input');
-inputDiv.id = 'input-text';
-document.body.appendChild(inputDiv);
-const generateButton = document.createElement('button');
-generateButton.id = 'generate-button';
-generateButton.textContent = 'Generate';
-document.body.appendChild(generateButton);
-const outputDiv = document.createElement('div');
-outputDiv.id = 'output';
-document.body.appendChild(outputDiv);
+const input = document.createElement('input');
+input.id = 'input-text';
+document.body.appendChild(input);
+const generate = document.createElement('button');
+generate.id = 'generate-button';
+generate.textContent = 'Generate';
+document.body.appendChild(generate);
+const output = document.createElement('div');
+output.id = 'output';
+output.style.color = 'white';
+document.body.appendChild(output);
 
-const generateButton = document.getElementById('generate-button');
-const inputText = document.getElementById('input-text');
-const outputDiv = document.getElementById('output');
+generateButton = document.getElementById('generate-button');
+inputText = document.getElementById('input-text');
+outputDiv = document.getElementById('output');
 
 const key = "AIzaSyAbktggYoEBqg2UKyGBDfz61bqvoixWyqw";
 
