@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="container">
+        <input id="input-text"></textarea>
+        <button id="generate-button">Generate</button>
+        <div id="output" class="output" style = "color:white"></div>
+    </div>
+
+    <script>
+        const generateButton = document.getElementById('generate-button');
+        const inputText = document.getElementById('input-text');
+        const outputDiv = document.getElementById('output');
+
+        const key = "AIzaSyAbktggYoEBqg2UKyGBDfz61bqvoixWyqw";
+
+        generateButton.addEventListener('click', async () => {
+            const prompt = inputText.value.trim();
+            if (!prompt) {
+                outputDiv.textContent = 'Please enter a prompt.';
+                return;
+            }
+
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${key}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        "contents":[{"parts":[{"text": prompt}]}],
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch response from Gemini API.');
+                }
+
+                const data = await response.json();
+                outputDiv.textContent = data.candidates[0].content.parts[0].text || 'No response received.';
+            } catch (error) {
+                outputDiv.textContent = `Error: ${error.message}`;
+            }
+        });
+    </script>
+</body>
+</html>
